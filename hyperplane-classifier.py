@@ -14,7 +14,7 @@ def pnf(x,a,w) :
 def classifier(input, o, r) :
 	return dot(input, o) - r
 
-def margin(x,y, rho) :
+def margin(x,y, rho, omega) :
     tmp = []
     result = []
     for entry in x :
@@ -26,7 +26,7 @@ def margin(x,y, rho) :
 def classify(x, o, r):
     result = []
     for entry in x :
-	    result.append(classifier(entry, omega, rho))
+	    result.append(classifier(entry, o, r))
     return result
 
     
@@ -42,8 +42,8 @@ rho = r*norm(omega)
 print "Aufgabe 7.2: Hyperplane Classifier"
 print "r =", r
 print "rho =", rho
-print "m =", margin(x,y,rho)
-print "M =", amin(margin(x,y,rho))
+print "m =", margin(x,y,rho, omega)
+print "M =", amin(margin(x,y,rho, omega))
 print "Classifier f =", classify(x,omega,rho)
 print "Plotting the stuff:"
 
@@ -64,7 +64,5 @@ plt.axis([-2,10,-2,10])
 plt.show()
 x.append(xfalse)
 y.append(-1)
-print "m =", margin(x,y,rho)
+print "m =", margin(x,y,rho,omega)
 print "Classifier f =", classify(x,omega, rho) 
-
-
