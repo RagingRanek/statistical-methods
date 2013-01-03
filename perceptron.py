@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
 # Perceptron Algorithm: Implementation of Gradient Descent
-# How to use:
+#
+# @author Konrad Kühne
+#
+# How to :
 # - python perceptron.py [path-to-corpus.txt]
 # - e.g. python perceptron.py /home/foo/corpus.txt
 ######################################################################
@@ -56,7 +59,8 @@ def perceptron(x_in,y_in,rho_init,omega_init, alpha) :
     errors = False
     loopRound = 0
     while not errors :
-        print 'Iteration:', loopRound
+        CSI="\x1B["
+        print CSI + '34;1m' + 'Iteration: {}'.format(loopRound) + CSI + "0m"
         loopRound += 1
         errors = True
         for i in range(len(y)) :
@@ -64,6 +68,7 @@ def perceptron(x_in,y_in,rho_init,omega_init, alpha) :
                 omega = map(sum, zip(omega,map(lambda z: alpha*y[i]*z, x[i])))
                 rho = rho + alpha*y[i]
                 errors = False
+        #prints current omega, rho and error after each loop
         print 'omega = {}, rho = {}, errors = {}'.format(omega, rho, errors)
 
 # Initializing the stuff
@@ -82,5 +87,6 @@ for i in range(len(rawData)) :
         x.append(scrape(rawData[i], categories))
 
 # Energize!
-print 'PERCEPTRON ALGORITHM'
+print '>>>  PERCEPTRON ALGORITHM  <<<'
 perceptron(x,y,rho_init,omega_init, alpha)
+
