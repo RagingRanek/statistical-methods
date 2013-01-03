@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
 # Perceptron Algorithm: Implementation of Gradient Descent
+# How to use:
+# - python perceptron.py [path-to-corpus.txt]
+# - e.g. python perceptron.py /home/foo/corpus.txt
 ######################################################################
-
+import sys
 from numpy import dot
 from math import *
 
@@ -61,10 +64,11 @@ def perceptron(x_in,y_in,rho_init,omega_init, alpha) :
                 omega = map(sum, zip(omega,map(lambda z: alpha*y[i]*z, x[i])))
                 rho = rho + alpha*y[i]
                 errors = False
-                print 'omega = {}, rho = {}'.format(omega, rho)
+        print 'omega = {}, rho = {}, errors = {}'.format(omega, rho, errors)
 
 # Initializing the stuff
-rawData = readFile('/home/konny/uni/sm/blaetter/corpus.txt')
+pathToData = sys.argv[1]
+rawData = readFile(pathToData)
 categories = categories()
 omega_init = [1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0]
 rho_init = 0.0
@@ -72,12 +76,11 @@ alpha = 0.5
 y = [1,-1,-1,1,1,1,1,-1,1,-1]
 x = []
 
-# Count the words in the rawData
-nr = 0
+# Count the given words in the rawData
 for i in range(len(rawData)) :
     if(rawData[i] != '') :
-        nr = nr + 1
         x.append(scrape(rawData[i], categories))
 
 # Energize!
+print 'PERCEPTRON ALGORITHM'
 perceptron(x,y,rho_init,omega_init, alpha)
